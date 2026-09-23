@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ireland Landing Pages
 
-## Getting Started
+Shared Next.js app powering every landing page under `ireland.educationstate.co`.
+One deployment, one design system — each landing page is just a route folder.
 
-First, run the development server:
+- **Live:** https://ireland.educationstate.co (once DNS/cert finish propagating), also at https://ireland-activities.vercel.app
+- **Repo:** https://github.com/gezmakan/Ireland-Landing-Pages — pushes to `main` auto-deploy via the connected Vercel project (`educationstate/ireland-activities`)
+
+## Pages
+
+| Path | Route file |
+|---|---|
+| `/activities` | `src/app/activities/page.tsx` |
+
+`/` redirects to `/activities` (see `src/app/page.tsx`) — revisit that once there's more than one page to land visitors on.
+
+## Adding a new landing page (e.g. `/food`)
+
+1. Create `src/app/food/page.tsx`.
+2. Reuse the shared chrome from `src/components/`: `Header` and `Footer` are generic (logo + link only, no page-specific content) — import them as-is.
+3. Build page-specific sections as new components in `src/components/` (e.g. `FoodHero.tsx`, `FoodMenu.tsx`), following the pattern of `Hero.tsx` / `ActivityExplorer.tsx`.
+4. If the page needs its own data set, add it under `src/data/` (see `activities.ts` for the shape used on `/activities`).
+5. Commit and push to `main` — Vercel picks it up automatically. No new Vercel project, no new domain, no new DNS record needed; it's served at `ireland.educationstate.co/food` immediately.
+
+## Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — it redirects to `/activities`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+vercel --prod
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+(Usually unnecessary — pushing to `main` on GitHub triggers this automatically.)
