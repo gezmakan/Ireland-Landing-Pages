@@ -1,27 +1,29 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { activities, CATEGORY_LABELS, type ActivityCategory } from "@/data/activities";
+import type { Activity, ActivityCategory } from "@/data/activities";
+import { getDictionary, type Locale } from "@/lib/dictionaries";
 import ActivityCard from "./ActivityCard";
 
 type Filter = "all" | ActivityCategory;
 
-const TABS: { key: Filter; label: string }[] = [
-  { key: "all", label: "All Activities" },
-  { key: "free", label: CATEGORY_LABELS.free },
-  { key: "student", label: CATEGORY_LABELS.student },
-  { key: "daytrip", label: CATEGORY_LABELS.daytrip },
-];
-
-export default function ActivityExplorer() {
+export default function ActivityExplorer({ activities, locale }: { activities: Activity[]; locale: Locale }) {
+  const t = getDictionary(locale).explorer;
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
+
+  const TABS: { key: Filter; label: string }[] = [
+    { key: "all", label: t.tabs.all },
+    { key: "free", label: t.tabs.free },
+    { key: "student", label: t.tabs.student },
+    { key: "daytrip", label: t.tabs.daytrip },
+  ];
 
   const counts = useMemo(() => {
     const base: Record<Filter, number> = { all: activities.length, free: 0, student: 0, daytrip: 0 };
     for (const a of activities) base[a.category]++;
     return base;
-  }, []);
+  }, [activities]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -30,7 +32,7 @@ export default function ActivityExplorer() {
       const matchesQuery = !q || a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q);
       return matchesFilter && matchesQuery;
     });
-  }, [filter, query]);
+  }, [activities, filter, query]);
 
   return (
     <section id="activities" className="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
@@ -73,7 +75,7 @@ export default function ActivityExplorer() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search activities…"
+            placeholder={t.searchPlaceholder}
             className="w-full rounded-full border border-black/10 bg-white py-2.5 pl-9 pr-4 text-sm text-navy placeholder:text-neutral-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
@@ -81,12 +83,12 @@ export default function ActivityExplorer() {
 
       {filtered.length === 0 ? (
         <div className="mt-16 rounded-2xl border border-dashed border-black/10 bg-neutral-50 py-16 text-center text-sm text-neutral-500">
-          No activities match &ldquo;{query}&rdquo;. Try a different search.
+          {t.noResults(query)}
         </div>
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((activity) => (
-            <ActivityCard key={activity.slug} activity={activity} />
+            <ActivityCard key={activity.slug} activity={activity} locale={locale} />
           ))}
         </div>
       )}

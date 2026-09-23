@@ -1,43 +1,46 @@
 import Image from "next/image";
-import { activities } from "@/data/activities";
+import type { Activity } from "@/data/activities";
+import { getDictionary, type Locale } from "@/lib/dictionaries";
 
-const collage = [
-  activities.find((a) => a.title === "Phoenix Park"),
-  activities.find((a) => a.title === "Guinness Storehouse"),
-  activities.find((a) => a.title === "Trinity College Library & Book of Kells"),
-  activities.find((a) => a.title === "Cliffs of Moher Tour from Dublin"),
-].filter((a): a is NonNullable<typeof a> => Boolean(a));
-
-const stats = [
-  { value: `${activities.length}+`, label: "Curated Activities" },
-  { value: `${activities.filter((a) => a.category === "free").length}`, label: "Free To Visit" },
-  { value: `${activities.filter((a) => a.category === "daytrip").length}`, label: "Day Trips" },
-  { value: "4", label: "Cities Covered" },
+const collageSlugs = [
+  "phoenix-park",
+  "guinness-storehouse",
+  "trinity-college-library-book-of-kells",
+  "cliffs-of-moher-tour-from-dublin",
 ];
 
-export default function Hero() {
+export default function Hero({ activities, locale }: { activities: Activity[]; locale: Locale }) {
+  const t = getDictionary(locale).hero;
+
+  const collage = collageSlugs
+    .map((slug) => activities.find((a) => a.slug === slug))
+    .filter((a): a is Activity => Boolean(a));
+
+  const stats = [
+    { value: `${activities.length}+`, label: t.stats.curated },
+    { value: `${activities.filter((a) => a.category === "free").length}`, label: t.stats.free },
+    { value: `${activities.filter((a) => a.category === "daytrip").length}`, label: t.stats.daytrips },
+    { value: "4", label: t.stats.cities },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:pb-20 lg:pt-16">
         <div>
           <h1 className="text-3xl font-extrabold uppercase tracking-tight text-navy sm:text-4xl">
-            Ireland <span className="text-accent">Activity Guide</span>
+            {t.kickerPrefix} <span className="text-accent">{t.kickerAccent}</span>
           </h1>
           <p className="mt-3 text-2xl font-bold leading-snug text-navy sm:text-3xl">
-            Everything to do in Ireland, <span className="text-accent">during your visit.</span>
+            {t.headlinePrefix} <span className="text-accent">{t.headlineAccent}</span>
           </p>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-500 sm:text-xl">
-            From free museums to student-priced icons and full-day adventures — this is the same
-            curated activity list Education State shares with every international student, now
-            searchable in one place.
-          </p>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-500 sm:text-xl">{t.paragraph}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#activities"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-accent/20 transition hover:bg-accent-dark"
             >
-              Browse Activities
+              {t.browseCta}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
                 <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -46,7 +49,7 @@ export default function Hero() {
               href="https://educationstate.ie"
               className="inline-flex items-center rounded-full border border-black/10 px-6 py-3 text-sm font-semibold text-navy transition hover:bg-neutral-50"
             >
-              Visit Education State
+              {t.visitCta}
             </a>
           </div>
 

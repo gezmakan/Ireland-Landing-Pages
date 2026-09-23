@@ -9,9 +9,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ireland Activity List | Education State",
-  description:
-    "Free museums, student-priced attractions, and unforgettable day trips across Ireland — curated for Education State's international students.",
+  title: "Education State Ireland",
+  description: "Landing pages for Education State's international students in Ireland.",
 };
 
 export default function RootLayout({
