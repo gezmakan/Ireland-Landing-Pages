@@ -1,0 +1,20 @@
+import Image from "next/image";
+
+export default function Header() {
+  return (
+    <header className="sticky top-0 z-30 border-b border-black/5 bg-white/85 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-6 lg:px-8">
+        <a href="https://educationstate.ie" className="flex items-center">
+          <Image
+            src="/education-state-logo.png"
+            alt="Education State"
+            width={1870}
+            height={300}
+            priority
+            className="h-9 w-auto"
+          />
+        </a>
+      </div>
+    </header>
+  );
+}
