@@ -11,10 +11,12 @@ export const metadata: Metadata = {
     "Free museums, student-priced attractions, and unforgettable day trips across Ireland — curated for Education State's international students.",
 };
 
+const hrefs = { en: "/activities", tr: "/tr/activities", de: "/de/activities" };
+
 export default function ActivitiesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header locale="en" switchHref="/tr/activities" />
+      <Header locale="en" hrefs={hrefs} />
       <Hero activities={activities} locale="en" />
       <ActivityExplorer activities={activities} locale="en" />
       <Footer locale="en" />

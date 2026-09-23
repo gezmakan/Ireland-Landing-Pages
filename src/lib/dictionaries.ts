@@ -1,8 +1,15 @@
-export type Locale = "en" | "tr";
+export type Locale = "en" | "tr" | "de";
+
+export const LOCALES: Locale[] = ["en", "tr", "de"];
+
+export const LANGUAGE_NAMES: Record<Locale, string> = {
+  en: "English",
+  tr: "Türkçe",
+  de: "Deutsch",
+};
 
 export const dictionaries = {
   en: {
-    header: { en: "EN", tr: "TR" },
     footer: {
       tagline:
         "Since 2010, Education State & Eğitim İrlanda have helped thousands of students study abroad — with Ireland at the heart of everything we do.",
@@ -41,7 +48,6 @@ export const dictionaries = {
     },
   },
   tr: {
-    header: { en: "EN", tr: "TR" },
     footer: {
       tagline:
         "2010'dan bu yana Education State ve Eğitim İrlanda, binlerce öğrencinin yurt dışında eğitim almasına yardımcı oldu — ve bu yolculuğun kalbinde her zaman İrlanda var.",
@@ -77,6 +83,44 @@ export const dictionaries = {
       watchVideo: "Videoyu izle →",
       watchVideoAria: (title: string) => `${title} hakkında videoyu izle`,
       noVideo: "Video yok",
+    },
+  },
+  de: {
+    footer: {
+      tagline:
+        "Seit 2010 helfen Education State & Eğitim İrlanda Tausenden von Studierenden dabei, im Ausland zu studieren — mit Irland immer im Mittelpunkt.",
+      copyright: (year: number) =>
+        `© ${year} Education State. Alle Preisangaben zu Aktivitäten sind unverbindlich und können sich ändern.`,
+    },
+    hero: {
+      kickerPrefix: "Irland",
+      kickerAccent: "Aktivitätenführer",
+      headlinePrefix: "Alles, was man in Irland unternehmen kann,",
+      headlineAccent: "während des Aufenthalts.",
+      paragraph:
+        "Von kostenlosen Museen über Attraktionen zu Studierendenpreisen bis hin zu ganztägigen Abenteuern — dies ist dieselbe kuratierte Aktivitätenliste, die Education State mit jedem internationalen Studierenden teilt, jetzt an einem Ort durchsuchbar.",
+      browseCta: "Aktivitäten entdecken",
+      visitCta: "Education State besuchen",
+      stats: {
+        curated: "Kuratierte Aktivitäten",
+        free: "Kostenlos besuchbar",
+        daytrips: "Tagesausflüge",
+        cities: "Abgedeckte Städte",
+      },
+    },
+    explorer: {
+      tabs: { all: "Alle Aktivitäten", free: "Kostenlos", student: "Kostenpflichtig", daytrip: "Tagesausflüge" },
+      searchPlaceholder: "Aktivität suchen…",
+      noResults: (q: string) => `Keine Aktivitäten gefunden für „${q}". Versuchen Sie eine andere Suche.`,
+    },
+    card: {
+      freeEntry: "Kostenloser Eintritt",
+      free: "Kostenlos",
+      dayTrip: "Tagesausflug",
+      paidAttraction: "Kostenpflichtig",
+      watchVideo: "Video ansehen →",
+      watchVideoAria: (title: string) => `Video über ${title} ansehen`,
+      noVideo: "Kein Video",
     },
   },
 } as const;
