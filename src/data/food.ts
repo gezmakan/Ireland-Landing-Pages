@@ -478,7 +478,7 @@ const raw: Omit<Restaurant, "slug">[] = [
     offering: ["Halal", "Vegetarian", "Vegan"],
     priceRange: "€30-60",
     category: "japanese",
-    image: "https://images.unsplash.com/photo-1682566509605-b5bb1ef7eac2?auto=format&fit=crop&w=800&h=600&q=80",
+    image: "/chai-yo.webp",
   },
   {
     name: "The Korean Table",
