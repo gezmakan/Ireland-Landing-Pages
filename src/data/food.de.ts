@@ -19,6 +19,7 @@ const CUISINE_TYPE_DE: Record<string, string> = {
   "Vietnamese Food": "Vietnamesische Küche",
   "Brazilian Steakhouse": "Brasilianisches Steakhouse",
   "Malaysian Food": "Malaysische Küche",
+  "Persian Kebab": "Persischer Kebab",
 };
 
 const OFFERING_DE: Record<string, string> = {

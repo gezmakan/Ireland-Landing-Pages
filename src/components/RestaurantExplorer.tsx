@@ -26,6 +26,7 @@ export default function RestaurantExplorer({ restaurants, locale }: { restaurant
     { key: "vietnamese", label: t.tabs.vietnamese },
     { key: "brazilian", label: t.tabs.brazilian },
     { key: "malaysian", label: t.tabs.malaysian },
+    { key: "persian", label: t.tabs.persian },
   ];
 
   const counts = useMemo(() => {

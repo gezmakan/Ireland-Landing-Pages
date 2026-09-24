@@ -15,6 +15,7 @@ const CATEGORY_BADGE: Record<CuisineCategory, string> = {
   vietnamese: "bg-teal-50 text-teal-700 ring-teal-600/20",
   brazilian: "bg-yellow-50 text-yellow-700 ring-yellow-600/20",
   malaysian: "bg-purple-50 text-purple-700 ring-purple-600/20",
+  persian: "bg-indigo-50 text-indigo-700 ring-indigo-600/20",
 };
 
 export default function RestaurantCard({ restaurant, locale }: { restaurant: Restaurant; locale: Locale }) {

@@ -9,7 +9,8 @@ export type CuisineCategory =
   | "korean"
   | "vietnamese"
   | "brazilian"
-  | "malaysian";
+  | "malaysian"
+  | "persian";
 
 export interface Restaurant {
   slug: string;
@@ -520,6 +521,16 @@ const raw: Omit<Restaurant, "slug">[] = [
     category: "malaysian",
     image: "https://images.unsplash.com/photo-1727961315041-8e384dde2a63?auto=format&fit=crop&w=800&h=600&q=80",
   },
+  {
+    name: "Zaytoon",
+    cuisineType: "Persian Kebab",
+    address: "15 Parliament St, Temple Bar, Dublin, D02 FW60",
+    rating: 4.3,
+    offering: ["Halal"],
+    priceRange: "€10-20",
+    category: "persian",
+    image: "https://images.unsplash.com/photo-1773620494884-940e0db95e46?auto=format&fit=crop&w=800&h=600&q=80",
+  },
 ];
 
 export const restaurants: Restaurant[] = raw.map((r) => ({ ...r, slug: slugify(r.name) }));
@@ -536,6 +547,7 @@ export const CUISINE_LABELS: Record<CuisineCategory, string> = {
   vietnamese: "Vietnamese",
   brazilian: "Brazilian",
   malaysian: "Malaysian",
+  persian: "Persian",
 };
 
 export function mapsSearchUrl(r: Pick<Restaurant, "name" | "address">) {
