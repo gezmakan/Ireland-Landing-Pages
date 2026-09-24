@@ -19,8 +19,8 @@ export const dictionaries = {
     hero: {
       kickerPrefix: "Ireland",
       kickerAccent: "Activity Guide",
-      headlinePrefix: "Everything to do in Ireland,",
-      headlineAccent: "during your visit.",
+      headlinePrefix: "What to see in Ireland,",
+      headlineAccent: "during your visit?",
       paragraph:
         "From free museums to student-priced icons and full-day adventures — this is the same curated activity list Education State shares with every international student, now searchable in one place.",
       browseCta: "Browse Activities",
