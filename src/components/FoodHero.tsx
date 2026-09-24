@@ -4,8 +4,8 @@ import { restaurants } from "@/data/food";
 const collage = [
   {
     key: "mixed-grill",
-    alt: "Turkish mixed grill platter",
-    image: "https://images.unsplash.com/photo-1763647818263-62a9256f097c?auto=format&fit=crop&w=800&h=800&q=80",
+    alt: "Turkish adana kebab grill with rice and flatbread",
+    image: "https://images.unsplash.com/photo-1620167790054-de54f34308bb?auto=format&fit=crop&w=800&h=800&q=80",
   },
   {
     key: "sushi",
