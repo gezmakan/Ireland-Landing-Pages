@@ -4,9 +4,16 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { LANGUAGE_NAMES, LOCALES, type Locale } from "@/lib/dictionaries";
 
-export default function LanguageSwitcher({ locale, hrefs }: { locale: Locale; hrefs: Record<Locale, string> }) {
+export default function LanguageSwitcher({
+  locale,
+  hrefs,
+}: {
+  locale: Locale;
+  hrefs: Partial<Record<Locale, string>>;
+}) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const available = LOCALES.filter((l) => hrefs[l]);
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -22,6 +29,8 @@ export default function LanguageSwitcher({ locale, hrefs }: { locale: Locale; hr
       document.removeEventListener("keydown", onEscape);
     };
   }, []);
+
+  if (available.length <= 1) return null;
 
   return (
     <div ref={rootRef} className="relative">
@@ -49,10 +58,10 @@ export default function LanguageSwitcher({ locale, hrefs }: { locale: Locale; hr
           role="listbox"
           className="absolute right-0 top-full z-40 mt-2 w-40 overflow-hidden rounded-xl border border-black/5 bg-white py-1 shadow-lg"
         >
-          {LOCALES.map((l) => (
+          {available.map((l) => (
             <Link
               key={l}
-              href={hrefs[l]}
+              href={hrefs[l]!}
               role="option"
               aria-selected={l === locale}
               onClick={() => setOpen(false)}

@@ -1,0 +1,481 @@
+export type CuisineCategory = "local" | "turkish" | "chinese" | "indian" | "italian" | "japanese" | "mexican";
+
+export interface Restaurant {
+  slug: string;
+  name: string;
+  cuisineType: string;
+  address: string;
+  rating: number;
+  offering: string[];
+  priceRange: string;
+  category: CuisineCategory;
+  image: string;
+}
+
+const IMG = "https://us-ms.gr-cdn.com/getresponse-woBhR/photos";
+
+function slugify(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function offering(text: string) {
+  return text
+    .split(",")
+    .map((t) => t.replace(/\.$/, "").trim())
+    .filter(Boolean);
+}
+
+const raw: Omit<Restaurant, "slug">[] = [
+  // Local
+  {
+    name: "Beshoff Bros",
+    cuisineType: "Fish and Chips",
+    address: "75 Mespil Rd, D04 T8N7",
+    rating: 4.3,
+    offering: offering("Late-night Food"),
+    priceRange: "€10-20",
+    category: "local",
+    image: "https://us-wbe-img2.gr-cdn.com/user/50d29838-0dc2-403e-9a9b-f8e57d8787c6/6c57c9a5-30fd-45bb-bc20-28dc665d32b5-webp.webp",
+  },
+  {
+    name: "The Celt",
+    cuisineType: "Traditional Irish Food",
+    address: "81 Talbot St, North City, D01 YK51",
+    rating: 4.6,
+    offering: offering("Pub Experience"),
+    priceRange: "€20-30",
+    category: "local",
+    image: `${IMG}/7d39bf7d-df42-4229-b72f-d0879f997514.jpg`,
+  },
+  {
+    name: "The Silver Penny",
+    cuisineType: "British and Irish Classics",
+    address: "12A Abbey Street Lower, North City, D01 AY67",
+    rating: 3.9,
+    offering: offering("All day dining"),
+    priceRange: "€10-20",
+    category: "local",
+    image: `${IMG}/57a651aa-a263-4cb9-af7e-030060f9f248.jpg`,
+  },
+  {
+    name: "The Quays Dublin",
+    cuisineType: "Traditional Irish Food",
+    address: "10-12 Temple Bar, D02 EW63",
+    rating: 4.5,
+    offering: offering("Pub Experience"),
+    priceRange: "€20-30",
+    category: "local",
+    image: `${IMG}/cdbb1a15-d622-42af-a15d-df09e7effb75.jpg`,
+  },
+  {
+    name: "The Old Storehouse",
+    cuisineType: "Traditional Irish Food",
+    address: "3 Crown Alley, Temple Bar, D02 CX67",
+    rating: 4.3,
+    offering: offering("Pub Experience"),
+    priceRange: "€20-30",
+    category: "local",
+    image: `${IMG}/9af1d58e-a149-46b1-92de-f54d609be398.jpg`,
+  },
+  {
+    name: "Darkey Kelly's",
+    cuisineType: "Traditional Irish Food",
+    address: "19 Fishamble St, Christchurch Pl, Temple Bar, D08 PD8W",
+    rating: 4.7,
+    offering: offering("Pub Experience"),
+    priceRange: "€20-30",
+    category: "local",
+    image: `${IMG}/d911f4c0-dc65-44e9-87f1-433e177ec0b4.jpg`,
+  },
+
+  // Turkish
+  {
+    name: "Reyna",
+    cuisineType: "Turkish Food",
+    address: "29-30 Dame St, D02 A025",
+    rating: 4.5,
+    offering: offering("All day Food, Vegan, Halal"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/f88b15ac-9929-445f-b772-6a11a0cbfd59.jpg`,
+  },
+  {
+    name: "Chiya",
+    cuisineType: "Berlin-Style Doner",
+    address: "71 Dame St, Temple Bar, D02 YH90",
+    rating: 4.6,
+    offering: offering("All day Food, Halal"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/91cfbde5-af89-444a-a6ef-996df371b145.jpg`,
+  },
+  {
+    name: "Pera Mediterranean BBQ",
+    cuisineType: "Turkish Cuisine",
+    address: "61 Mary St, North City, Dublin 1, D01 XP94",
+    rating: 4.7,
+    offering: offering("Authentic Charcoal Grill Cooking Experience, Halal"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/55acce4c-c9e8-40f9-9f2f-6cd4a544a8d3.jpg`,
+  },
+  {
+    name: "The Flame",
+    cuisineType: "Turkish Food",
+    address: "Burnell Green, Unit 1 A Malahide Rd, Priorswood, D17 KR77",
+    rating: 4.8,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/6a6ae74a-5f05-4498-aa99-7c08b80c6667.jpg`,
+  },
+  {
+    name: "Sultan's Hann Ocakbasi Clondalkin",
+    cuisineType: "Turkish Food",
+    address: "7 Castle Cres, Clondalkin, Dublin, D22 FR59",
+    rating: 4.6,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/262c49fc-0142-45d0-8d20-f8ce8024001c.jpg`,
+  },
+  {
+    name: "Sofra Café and Grill Restaurant",
+    cuisineType: "Turkish Food",
+    address: "18 Liffey St. Upper, North City, Dublin, D01 C640",
+    rating: 4.2,
+    offering: offering("Halal, Vegetarian options"),
+    priceRange: "€10-20",
+    category: "turkish",
+    image: `${IMG}/00820aa6-bd4f-419b-9e0f-78fc252694ba.jpg`,
+  },
+
+  // Chinese
+  {
+    name: "Xian Street Food",
+    cuisineType: "Chinese Food",
+    address: "28 Anne St S, Dublin, D02 DX39",
+    rating: 4.0,
+    offering: offering("Halal meat options"),
+    priceRange: "€10-20",
+    category: "chinese",
+    image: `${IMG}/65994c9a-7ec9-4393-b86e-6f715ed92661.jpg`,
+  },
+  {
+    name: "Wing's World Cuisine",
+    cuisineType: "Chinese Food",
+    address: "32 Wolfe Tone St, North City, Dublin",
+    rating: 4.0,
+    offering: offering("Halal options"),
+    priceRange: "€20-30",
+    category: "chinese",
+    image: `${IMG}/4b93c7de-afa4-4cb4-8c22-000e981c4541.jpg`,
+  },
+  {
+    name: "Boss Stop Restaurant",
+    cuisineType: "Chinese Food",
+    address: "24 South Great George's Street, Dublin 2, D02 XE40",
+    rating: 4.9,
+    offering: offering("Halal options"),
+    priceRange: "€20-30",
+    category: "chinese",
+    image: `${IMG}/a91c66de-86c7-4417-b166-9574be727d8d.jpg`,
+  },
+  {
+    name: "Wok In Noodle Bar",
+    cuisineType: "Chinese Food",
+    address: "19 N Earl St, North City, Dublin",
+    rating: 4.0,
+    offering: offering("Halal options"),
+    priceRange: "€10-20",
+    category: "chinese",
+    image: `${IMG}/65fd585f-cd09-40d4-b245-6ef35b21f108.jpg`,
+  },
+  {
+    name: "Mama Yo",
+    cuisineType: "Chinese Food",
+    address: "76 Camden Street Lower, Saint Kevin's, Dublin, D02 X788",
+    rating: 4.2,
+    offering: offering("Halal options"),
+    priceRange: "€20-30",
+    category: "chinese",
+    image: `${IMG}/912bebd4-d555-4995-a2a0-96dc4600df5e.jpg`,
+  },
+  {
+    name: "Big Fan",
+    cuisineType: "Chinese Food",
+    address: "16 Aungier St, Dublin, D02 X044",
+    rating: 4.7,
+    offering: offering("Vegan options"),
+    priceRange: "€20-30",
+    category: "chinese",
+    image: `${IMG}/d418b333-56e9-432b-9d1b-65be69845916.jpg`,
+  },
+
+  // Indian
+  {
+    name: "Andhra Bhavan",
+    cuisineType: "Indian Food",
+    address: "85 Marlborough Pl, North City, Dublin 1, D01 A2X6",
+    rating: 4.7,
+    offering: offering("Halal"),
+    priceRange: "€20-30",
+    category: "indian",
+    image: `${IMG}/15266cea-7f35-468a-a37d-539705d5c0b1.jpg`,
+  },
+  {
+    name: "Hyderabadi Kitchen",
+    cuisineType: "Indian Food",
+    address: "143 Parnell St, Rotunda, Dublin, D01 R9P7",
+    rating: 4.8,
+    offering: offering("Halal"),
+    priceRange: "€20-30",
+    category: "indian",
+    image: `${IMG}/52169aa0-92d9-4ea8-b683-5cceb31be461.jpg`,
+  },
+  {
+    name: "Indian Zaika",
+    cuisineType: "Indian Food",
+    address: "4 Old Cabra Rd, Cabra East, Dublin 7, D07 RY97",
+    rating: 4.7,
+    offering: offering("Halal"),
+    priceRange: "€20-30",
+    category: "indian",
+    image: `${IMG}/6ad93ee4-f01d-44e9-ac95-6915318eec44.jpg`,
+  },
+  {
+    name: "Holi Indian Restaurant",
+    cuisineType: "Indian Food",
+    address: "71 Dame St, Temple Bar, Dublin, D02 YH90",
+    rating: 4.6,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "indian",
+    image: `${IMG}/1a014707-c2e0-40fc-be10-3c4fb7c276aa.jpg`,
+  },
+  {
+    name: "Spice and Rice Express",
+    cuisineType: "Indian Food",
+    address: "29-30 Dame St, Dublin 2, D02 A025",
+    rating: 4.5,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "indian",
+    image: `${IMG}/c5f95c90-13e7-4417-9f6c-a36da96cac12.jpg`,
+  },
+  {
+    name: "Doolally",
+    cuisineType: "Indian Food",
+    address: "71 Dame St, Temple Bar, Dublin, D02 YH90",
+    rating: 4.6,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "indian",
+    image: `${IMG}/c7030a4c-e86a-4699-ab06-396ed73157e4.jpg`,
+  },
+
+  // Italian
+  {
+    name: "Cappello",
+    cuisineType: "Italian Food",
+    address: "54A Thomas St, The Liberties, Dublin 8, D08 PV25",
+    rating: 4.7,
+    offering: offering("Halal meat options"),
+    priceRange: "€10-20",
+    category: "italian",
+    image: `${IMG}/4740fd68-ec80-45a8-a7da-f1559def8d06.jpg`,
+  },
+  {
+    name: "Parmezza",
+    cuisineType: "Italian Food",
+    address: "1 Liffey St. Lower, North City, Dublin, D01 PV30",
+    rating: 4.4,
+    offering: offering("Halal"),
+    priceRange: "€10-20",
+    category: "italian",
+    image: `${IMG}/019620cb-8068-4775-a839-8d3c8eb877da.jpg`,
+  },
+  {
+    name: "Da Mimmo",
+    cuisineType: "Italian Food",
+    address: "148 N Strand Rd, North Wall, Dublin, D03 FK52",
+    rating: 4.6,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "italian",
+    image: `${IMG}/edc204cf-8719-4ea4-9af7-c862a4911445.jpg`,
+  },
+  {
+    name: "La Caverna",
+    cuisineType: "Italian Food",
+    address: "12 Fownes St Upper, Temple Bar, Dublin 2, D02 PY51",
+    rating: 4.7,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "italian",
+    image: `${IMG}/74f62f9c-9eaf-4fc6-856a-e5cdccc1dc37.jpg`,
+  },
+  {
+    name: "Dall'Italiano Restaurant",
+    cuisineType: "Italian Food",
+    address: "Hart's Corner, 1-2 Finglas Rd, Glasnevin, D11 RD93",
+    rating: 4.9,
+    offering: offering("Vegetarian options"),
+    priceRange: "€10-20",
+    category: "italian",
+    image: `${IMG}/06f98664-54af-4d0b-899c-0430201e3f34.jpg`,
+  },
+  {
+    name: "Zizzi Dublin",
+    cuisineType: "Italian Food",
+    address: "24 Suffolk St, Dublin, D02 FR96",
+    rating: 4.6,
+    offering: offering("Vegetarian options"),
+    priceRange: "€10-20",
+    category: "italian",
+    image: `${IMG}/e00d8e30-0403-44e0-b98d-fefb079a40e4.jpg`,
+  },
+
+  // Japanese
+  {
+    name: "Musashi Noodle and Sushi Bar",
+    cuisineType: "Japanese Food",
+    address: "15 Capel St, North City, Dublin 1, D01 E1C0",
+    rating: 4.6,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "japanese",
+    image: `${IMG}/b29d9df3-a9cb-45e6-880e-a83d8d1b8cc2.jpg`,
+  },
+  {
+    name: "Takara Ramen and Deli Sushi Bar",
+    cuisineType: "Japanese Food",
+    address: "37 Abbey Street Upper, North City, D01 P585",
+    rating: 4.6,
+    offering: offering("Halal options"),
+    priceRange: "€10-20",
+    category: "japanese",
+    image: `${IMG}/06f962c8-3583-4a9d-b38a-dab56202bb08.jpg`,
+  },
+  {
+    name: "Zakura Izakaya",
+    cuisineType: "Japanese Food",
+    address: "7 Baggot Street Upper, Dublin 4, D04 K7H1",
+    rating: 4.6,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "japanese",
+    image: `${IMG}/86c3325e-92bd-4ce5-9fd3-0174902b9ff9.jpg`,
+  },
+  {
+    name: "Yamamori Izakaya",
+    cuisineType: "Japanese Food",
+    address: "12 South Great George's Street, Dublin 2, D02 RD36",
+    rating: 4.6,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "japanese",
+    image: `${IMG}/8d6c4026-f401-43ec-aa32-d8fcc3d42f3d.jpg`,
+  },
+  {
+    name: "Yoi Izakaya",
+    cuisineType: "Japanese Food",
+    address: "71 Mespil Rd, D04 XA71",
+    rating: 4.7,
+    offering: offering("Vegetarian options"),
+    priceRange: "€20-30",
+    category: "japanese",
+    image: `${IMG}/f20a1a04-ec21-4a89-95d7-49577edf7bd6.jpg`,
+  },
+  {
+    name: "Izumi",
+    cuisineType: "Japanese Food",
+    address: "110 Drumcondra Rd Upper, Drumcondra, D09 YF84",
+    rating: 4.2,
+    offering: offering("Halal options"),
+    priceRange: "€10-20",
+    category: "japanese",
+    image: `${IMG}/3e162c09-064c-4b3f-ad70-1b6d4ab53f20.jpg`,
+  },
+
+  // Mexican
+  {
+    name: "El Grito",
+    cuisineType: "Mexican Food",
+    address: "20 Mountjoy Square E, Mountjoy, D01 K3T1",
+    rating: 4.5,
+    offering: offering("Vegetarian and Gluten Free Options"),
+    priceRange: "€20-30",
+    category: "mexican",
+    image: `${IMG}/abe30f57-a327-4445-a32b-ad83fc32b510.jpg`,
+  },
+  {
+    name: "Tula Mexican Grill",
+    cuisineType: "Mexican Food",
+    address: "30 Essex St E, Temple Bar, D02 CC02",
+    rating: 4.3,
+    offering: offering("Halal Options"),
+    priceRange: "€10-20",
+    category: "mexican",
+    image: `${IMG}/14931bb2-7f2a-4543-9ab4-33e2fd803376.jpg`,
+  },
+  {
+    name: "Pickosito Northern Mexican Taqueria",
+    cuisineType: "Mexican Food",
+    address: "N Lotts, North City, D01 K8N3",
+    rating: 4.8,
+    offering: offering("Vegan and Vegetarian options"),
+    priceRange: "€10-20",
+    category: "mexican",
+    image: `${IMG}/be03b0eb-8bb8-4774-9d9a-b94da1522bc8.jpg`,
+  },
+  {
+    name: "Salsa - Authentic Mexican Food",
+    cuisineType: "Mexican Food",
+    address: "Custom House Square, Mayor Street Lower, IFSC, Dublin",
+    rating: 4.4,
+    offering: offering("Vegetarian and Vegan options"),
+    priceRange: "€10-20",
+    category: "mexican",
+    image: `${IMG}/db48b915-664c-4de8-82ee-5aecfe4db1ac.jpg`,
+  },
+  {
+    name: "Pablo Picante",
+    cuisineType: "Mexican Food",
+    address: "15 Capel St, North City, D01 E1C0",
+    rating: 4.4,
+    offering: offering("Vegan and Vegetarian options"),
+    priceRange: "€10-20",
+    category: "mexican",
+    image: `${IMG}/d373fb50-4021-4425-aae5-dc548c610628.jpg`,
+  },
+  {
+    name: "Boojum",
+    cuisineType: "Mexican Food",
+    address: "3 Abbey Street Lower, North City, D01 K6R2",
+    rating: 4.3,
+    offering: offering("Vegan and Vegetarian options"),
+    priceRange: "€10-20",
+    category: "mexican",
+    image: `${IMG}/cd600e2f-ff3a-4a5b-8e68-f4a38edfdcc5.jpg`,
+  },
+];
+
+export const restaurants: Restaurant[] = raw.map((r) => ({ ...r, slug: slugify(r.name) }));
+
+export const CUISINE_LABELS: Record<CuisineCategory, string> = {
+  local: "Local",
+  turkish: "Turkish",
+  chinese: "Chinese",
+  indian: "Indian",
+  italian: "Italian",
+  japanese: "Japanese",
+  mexican: "Mexican",
+};
+
+export function mapsSearchUrl(r: Pick<Restaurant, "name" | "address">) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${r.name}, ${r.address}`)}`;
+}
