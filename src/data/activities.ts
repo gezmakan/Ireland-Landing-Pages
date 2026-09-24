@@ -538,6 +538,16 @@ const raw: Omit<Activity, "slug">[] = [
     image: `${IMG}/c6b032d0-6256-42a2-9594-f9d21c6d78ef-webp.webp`,
     video: "https://www.youtube.com/watch?v=gGJ9VXrIztw&t=9s",
   },
+  {
+    title: "Belfast and Titanic Tour from Dublin",
+    description:
+      "A full-day trip to Belfast with skip-the-line entry to the Titanic Belfast exhibition, plus a stop at the ancient Celtic crosses of Monasterboice.",
+    price: "€69",
+    category: "daytrip",
+    image:
+      "https://s3-eu-west-1.amazonaws.com/paddywagontours.images/belfast-including-titanic-experience-tour-from-dublin-copyright-paddywagon-tours_16042025095616_xl.jpg",
+    video: "https://www.youtube.com/watch?v=eL7LUhKs6ys",
+  },
 ];
 
 export const activities: Activity[] = raw.map((a) => ({ ...a, slug: slugify(a.title) }));

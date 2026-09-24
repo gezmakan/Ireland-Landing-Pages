@@ -274,6 +274,11 @@ const translations: Record<string, { title: string; description: string }> = {
     description:
       "Muhteşem göller, romantik kaleler, taş duvarlar ve ıssız vadileriyle Connemara; The Quiet Man ve The Guard gibi birçok gişe rekortmeni filmde yer alır.",
   },
+  "belfast-and-titanic-tour-from-dublin": {
+    title: "Dublin'den Belfast ve Titanic Turu",
+    description:
+      "Titanic Belfast sergisine sıra beklemeden giriş ve Monasterboice'un antik Kelt haçlarına uğramayı içeren, Belfast'a tam günlük bir gezi.",
+  },
 };
 
 export const activitiesTr: Activity[] = activities.map((a) => {

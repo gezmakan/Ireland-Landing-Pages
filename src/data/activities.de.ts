@@ -276,6 +276,11 @@ const translations: Record<string, { title: string; description: string }> = {
     description:
       "Mit seinen herrlichen Seen, romantischen Burgen, Steinmauern und einsamen Tälern ist Connemara Schauplatz vieler Blockbuster-Filme, etwa „The Quiet Man\" mit John Wayne und Maureen O'Hara sowie „The Guard\" mit Brendan Gleeson.",
   },
+  "belfast-and-titanic-tour-from-dublin": {
+    title: "Belfast- und Titanic-Tour ab Dublin",
+    description:
+      "Ein Tagesausflug nach Belfast mit Warteschlangen-freiem Eintritt in die Ausstellung Titanic Belfast sowie einem Stopp an den antiken keltischen Kreuzen von Monasterboice.",
+  },
 };
 
 export const activitiesDe: Activity[] = activities.map((a) => {
