@@ -146,16 +146,6 @@ const raw: Omit<Restaurant, "slug">[] = [
     category: "turkish",
     image: `${IMG}/262c49fc-0142-45d0-8d20-f8ce8024001c.jpg`,
   },
-  {
-    name: "Sofra Café and Grill Restaurant",
-    cuisineType: "Turkish Food",
-    address: "18 Liffey St. Upper, North City, Dublin, D01 C640",
-    rating: 4.2,
-    offering: ["Halal", "Vegetarian"],
-    priceRange: "€10-20",
-    category: "turkish",
-    image: `${IMG}/00820aa6-bd4f-419b-9e0f-78fc252694ba.jpg`,
-  },
 
   // Chinese
   {
@@ -241,16 +231,6 @@ const raw: Omit<Restaurant, "slug">[] = [
     image: `${IMG}/52169aa0-92d9-4ea8-b683-5cceb31be461.jpg`,
   },
   {
-    name: "Indian Zaika",
-    cuisineType: "Indian Food",
-    address: "4 Old Cabra Rd, Cabra East, Dublin 7, D07 RY97",
-    rating: 4.7,
-    offering: ["Halal"],
-    priceRange: "€20-30",
-    category: "indian",
-    image: `${IMG}/6ad93ee4-f01d-44e9-ac95-6915318eec44.jpg`,
-  },
-  {
     name: "Holi Indian Restaurant",
     cuisineType: "Indian Food",
     address: "71 Dame St, Temple Bar, Dublin, D02 YH90",
@@ -259,26 +239,6 @@ const raw: Omit<Restaurant, "slug">[] = [
     priceRange: "€10-20",
     category: "indian",
     image: `${IMG}/1a014707-c2e0-40fc-be10-3c4fb7c276aa.jpg`,
-  },
-  {
-    name: "Spice and Rice Express",
-    cuisineType: "Indian Food",
-    address: "29-30 Dame St, Dublin 2, D02 A025",
-    rating: 4.5,
-    offering: ["Halal"],
-    priceRange: "€10-20",
-    category: "indian",
-    image: `${IMG}/c5f95c90-13e7-4417-9f6c-a36da96cac12.jpg`,
-  },
-  {
-    name: "Doolally",
-    cuisineType: "Indian Food",
-    address: "71 Dame St, Temple Bar, Dublin, D02 YH90",
-    rating: 4.6,
-    offering: ["Halal"],
-    priceRange: "€10-20",
-    category: "indian",
-    image: `${IMG}/c7030a4c-e86a-4699-ab06-396ed73157e4.jpg`,
   },
 
   // Italian
@@ -393,16 +353,6 @@ const raw: Omit<Restaurant, "slug">[] = [
     priceRange: "€20-30",
     category: "japanese",
     image: `${IMG}/f20a1a04-ec21-4a89-95d7-49577edf7bd6.jpg`,
-  },
-  {
-    name: "Izumi",
-    cuisineType: "Japanese Food",
-    address: "110 Drumcondra Rd Upper, Drumcondra, D09 YF84",
-    rating: 4.2,
-    offering: ["Halal"],
-    priceRange: "€10-20",
-    category: "japanese",
-    image: `${IMG}/3e162c09-064c-4b3f-ad70-1b6d4ab53f20.jpg`,
   },
 
   // Mexican
