@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { restaurants } from "@/data/food";
+import { restaurants as baseRestaurants } from "@/data/food";
+import { getDictionary, type Locale } from "@/lib/dictionaries";
 
 const collage = [
   {
@@ -24,31 +25,34 @@ const collage = [
   },
 ];
 
-const cuisineCount = new Set(restaurants.map((r) => r.category)).size;
-const halalCount = restaurants.filter((r) => r.offering.some((o) => o.toLowerCase().includes("halal"))).length;
-const avgRating = (restaurants.reduce((sum, r) => sum + r.rating, 0) / restaurants.length).toFixed(1);
+// Computed from the canonical English data — counts are locale-invariant,
+// and the English "Halal" tag is what every translation maps from.
+const cuisineCount = new Set(baseRestaurants.map((r) => r.category)).size;
+const halalCount = baseRestaurants.filter((r) => r.offering.some((o) => o.toLowerCase().includes("halal"))).length;
+const avgRating = (baseRestaurants.reduce((sum, r) => sum + r.rating, 0) / baseRestaurants.length).toFixed(1);
 
-const stats = [
-  { value: `${restaurants.length}+`, label: "Restaurants Listed" },
-  { value: `${cuisineCount}`, label: "Cuisines Covered" },
-  { value: `${halalCount}+`, label: "Halal-Friendly" },
-  { value: avgRating, label: "Avg. Google Rating" },
-];
+export default function FoodHero({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).food;
 
-export default function FoodHero() {
+  const stats = [
+    { value: `${baseRestaurants.length}+`, label: t.stats.restaurants },
+    { value: `${cuisineCount}`, label: t.stats.cuisines },
+    { value: `${halalCount}+`, label: t.stats.halal },
+    { value: avgRating, label: t.stats.avgRating },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:pb-20 lg:pt-16">
         <div>
           <h1 className="text-3xl font-extrabold uppercase tracking-tight text-navy sm:text-4xl">
-            Ireland <span className="text-accent">Food Guide</span>
+            {t.kickerPrefix} <span className="text-accent">{t.kickerAccent}</span>
           </h1>
           <p className="mt-3 text-2xl font-bold leading-snug text-navy sm:text-3xl">
-            Where to eat in Ireland, <span className="text-accent">during your visit?</span>
+            {t.headlinePrefix} <span className="text-accent">{t.headlineAccent}</span>
           </p>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-500 sm:text-xl">
-            Explore over {restaurants.length}+ Dublin restaurants across {cuisineCount} cuisines, from cosy Irish
-            pubs to halal-friendly grills. Filter by cuisine, check the price range, and find your next meal.
+            {t.paragraph(baseRestaurants.length, cuisineCount)}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -56,7 +60,7 @@ export default function FoodHero() {
               href="#restaurants"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-accent/20 transition hover:bg-accent-dark"
             >
-              Browse Restaurants
+              {t.browseCta}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
                 <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -65,7 +69,7 @@ export default function FoodHero() {
               href="https://educationstate.ie"
               className="inline-flex items-center rounded-full border border-black/10 px-6 py-3 text-sm font-semibold text-navy transition hover:bg-neutral-50"
             >
-              Visit Education State
+              {t.visitCta}
             </a>
           </div>
 

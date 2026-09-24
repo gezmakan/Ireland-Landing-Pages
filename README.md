@@ -13,7 +13,9 @@ One deployment, one design system — each landing page is just a route folder.
 | `/activities` | `src/app/activities/page.tsx` |
 | `/tr/activities` | `src/app/tr/activities/page.tsx` |
 | `/de/activities` | `src/app/de/activities/page.tsx` |
-| `/food` | `src/app/food/page.tsx` (English only so far) |
+| `/food` | `src/app/food/page.tsx` |
+| `/tr/food` | `src/app/tr/food/page.tsx` |
+| `/de/food` | `src/app/de/food/page.tsx` |
 
 `/` redirects to `/activities` (see `src/app/page.tsx`) — revisit that once there's more than one page to land visitors on.
 

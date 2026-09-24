@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CuisineCategory, Restaurant } from "@/data/food";
-import { CUISINE_LABELS, mapsSearchUrl } from "@/data/food";
+import { mapsSearchUrl } from "@/data/food";
+import { getDictionary, type Locale } from "@/lib/dictionaries";
 
 const CATEGORY_BADGE: Record<CuisineCategory, string> = {
   local: "bg-amber-50 text-amber-700 ring-amber-600/20",
@@ -12,7 +13,8 @@ const CATEGORY_BADGE: Record<CuisineCategory, string> = {
   mexican: "bg-lime-50 text-lime-700 ring-lime-600/20",
 };
 
-export default function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
+export default function RestaurantCard({ restaurant, locale }: { restaurant: Restaurant; locale: Locale }) {
+  const t = getDictionary(locale).food;
   const mapsHref = mapsSearchUrl(restaurant);
 
   return (
@@ -74,7 +76,7 @@ export default function RestaurantCard({ restaurant }: { restaurant: Restaurant 
           <span
             className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1 ring-inset ${CATEGORY_BADGE[restaurant.category]}`}
           >
-            {CUISINE_LABELS[restaurant.category]}
+            {t.tabs[restaurant.category]}
           </span>
           <a
             href={mapsHref}
@@ -82,7 +84,7 @@ export default function RestaurantCard({ restaurant }: { restaurant: Restaurant 
             rel="noopener noreferrer"
             className="text-[12px] font-semibold text-accent-dark hover:text-accent"
           >
-            View on Maps →
+            {t.viewOnMaps}
           </a>
         </div>
       </div>

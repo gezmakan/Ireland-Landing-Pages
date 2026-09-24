@@ -1,31 +1,33 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { restaurants, CUISINE_LABELS, type CuisineCategory } from "@/data/food";
+import type { CuisineCategory, Restaurant } from "@/data/food";
+import { getDictionary, type Locale } from "@/lib/dictionaries";
 import RestaurantCard from "./RestaurantCard";
 
 type Filter = "all" | CuisineCategory;
 
-const TABS: { key: Filter; label: string }[] = [
-  { key: "all", label: "All Cuisines" },
-  { key: "local", label: CUISINE_LABELS.local },
-  { key: "turkish", label: CUISINE_LABELS.turkish },
-  { key: "chinese", label: CUISINE_LABELS.chinese },
-  { key: "indian", label: CUISINE_LABELS.indian },
-  { key: "italian", label: CUISINE_LABELS.italian },
-  { key: "japanese", label: CUISINE_LABELS.japanese },
-  { key: "mexican", label: CUISINE_LABELS.mexican },
-];
-
-export default function RestaurantExplorer() {
+export default function RestaurantExplorer({ restaurants, locale }: { restaurants: Restaurant[]; locale: Locale }) {
+  const t = getDictionary(locale).food;
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
+
+  const TABS: { key: Filter; label: string }[] = [
+    { key: "all", label: t.tabs.all },
+    { key: "local", label: t.tabs.local },
+    { key: "turkish", label: t.tabs.turkish },
+    { key: "chinese", label: t.tabs.chinese },
+    { key: "indian", label: t.tabs.indian },
+    { key: "italian", label: t.tabs.italian },
+    { key: "japanese", label: t.tabs.japanese },
+    { key: "mexican", label: t.tabs.mexican },
+  ];
 
   const counts = useMemo(() => {
     const base = { all: restaurants.length } as Record<Filter, number>;
     for (const r of restaurants) base[r.category] = (base[r.category] ?? 0) + 1;
     return base;
-  }, []);
+  }, [restaurants]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -38,7 +40,7 @@ export default function RestaurantExplorer() {
         r.address.toLowerCase().includes(q);
       return matchesFilter && matchesQuery;
     });
-  }, [filter, query]);
+  }, [restaurants, filter, query]);
 
   return (
     <section id="restaurants" className="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
@@ -81,7 +83,7 @@ export default function RestaurantExplorer() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search restaurants…"
+            placeholder={t.searchPlaceholder}
             className="w-full rounded-full border border-black/10 bg-white py-2.5 pl-9 pr-4 text-sm text-navy placeholder:text-neutral-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
         </div>
@@ -89,12 +91,12 @@ export default function RestaurantExplorer() {
 
       {filtered.length === 0 ? (
         <div className="mt-16 rounded-2xl border border-dashed border-black/10 bg-neutral-50 py-16 text-center text-sm text-neutral-500">
-          No restaurants match &ldquo;{query}&rdquo;. Try a different search.
+          {t.noResults(query)}
         </div>
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((restaurant) => (
-            <RestaurantCard key={restaurant.slug} restaurant={restaurant} />
+            <RestaurantCard key={restaurant.slug} restaurant={restaurant} locale={locale} />
           ))}
         </div>
       )}
