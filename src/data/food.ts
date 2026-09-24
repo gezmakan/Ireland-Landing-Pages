@@ -525,7 +525,7 @@ const raw: Omit<Restaurant, "slug">[] = [
     cuisineType: "Teppanyaki",
     address: "100 Baggot Street Lower, Dublin 2",
     rating: 4.6,
-    offering: ["Vegetarian", "Vegan"],
+    offering: ["Halal", "Vegetarian", "Vegan"],
     priceRange: "€30-60",
     category: "japanese",
     image: "https://images.unsplash.com/photo-1682566509605-b5bb1ef7eac2?auto=format&fit=crop&w=800&h=600&q=80",
@@ -568,7 +568,7 @@ const raw: Omit<Restaurant, "slug">[] = [
     offering: ["Halal", "Vegetarian"],
     priceRange: "€10-20",
     category: "malaysian",
-    image: "https://images.unsplash.com/photo-1770966485209-e20d97337f1a?auto=format&fit=crop&w=800&h=600&q=80",
+    image: "https://images.unsplash.com/photo-1727961315041-8e384dde2a63?auto=format&fit=crop&w=800&h=600&q=80",
   },
 ];
 

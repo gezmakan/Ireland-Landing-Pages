@@ -78,6 +78,7 @@ export const dictionaries = {
       searchPlaceholder: "Search restaurants…",
       noResults: (q: string) => `No restaurants match "${q}". Try a different search.`,
       viewOnMaps: "View on Maps →",
+      dietaryOrder: ["Halal", "Vegetarian", "Vegan", "Pub Experience", "Fish"],
     },
   },
   tr: {
@@ -149,6 +150,7 @@ export const dictionaries = {
       searchPlaceholder: "Restoran ara…",
       noResults: (q: string) => `"${q}" ile eşleşen restoran bulunamadı. Farklı bir arama deneyin.`,
       viewOnMaps: "Haritada Gör →",
+      dietaryOrder: ["Helal", "Vejetaryen", "Vegan", "Pub Deneyimi", "Balık"],
     },
   },
   de: {
@@ -220,6 +222,7 @@ export const dictionaries = {
       searchPlaceholder: "Restaurant suchen…",
       noResults: (q: string) => `Keine Restaurants gefunden für „${q}". Versuchen Sie eine andere Suche.`,
       viewOnMaps: "Auf Karte ansehen →",
+      dietaryOrder: ["Halal", "Vegetarisch", "Vegan", "Pub-Erlebnis", "Fisch"],
     },
   },
 } as const;

@@ -10,6 +10,7 @@ type Filter = "all" | CuisineCategory;
 export default function RestaurantExplorer({ restaurants, locale }: { restaurants: Restaurant[]; locale: Locale }) {
   const t = getDictionary(locale).food;
   const [filter, setFilter] = useState<Filter>("all");
+  const [tagFilters, setTagFilters] = useState<string[]>([]);
   const [query, setQuery] = useState("");
 
   const TABS: { key: Filter; label: string }[] = [
@@ -33,43 +34,87 @@ export default function RestaurantExplorer({ restaurants, locale }: { restaurant
     return base;
   }, [restaurants]);
 
+  const dietaryTags = useMemo(() => {
+    const present = new Set<string>();
+    restaurants.forEach((r) => r.offering.forEach((tag) => present.add(tag)));
+    return t.dietaryOrder.filter((tag) => present.has(tag));
+  }, [restaurants, t.dietaryOrder]);
+
+  const tagCounts = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const r of restaurants) {
+      for (const tag of r.offering) {
+        map[tag] = (map[tag] ?? 0) + 1;
+      }
+    }
+    return map;
+  }, [restaurants]);
+
+  function toggleTag(tag: string) {
+    setTagFilters((prev) => (prev.includes(tag) ? prev.filter((t2) => t2 !== tag) : [...prev, tag]));
+  }
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return restaurants.filter((r) => {
       const matchesFilter = filter === "all" || r.category === filter;
+      const matchesTags = tagFilters.length === 0 || tagFilters.some((tag) => r.offering.includes(tag));
       const matchesQuery =
         !q ||
         r.name.toLowerCase().includes(q) ||
         r.cuisineType.toLowerCase().includes(q) ||
         r.address.toLowerCase().includes(q);
-      return matchesFilter && matchesQuery;
+      return matchesFilter && matchesTags && matchesQuery;
     });
-  }, [restaurants, filter, query]);
+  }, [restaurants, filter, tagFilters, query]);
 
   return (
     <section id="restaurants" className="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <div className="no-scrollbar flex gap-2 overflow-x-auto">
-          {TABS.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setFilter(tab.key)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                filter === tab.key
-                  ? "bg-navy text-white shadow-sm"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+      <div className="flex flex-wrap gap-2">
+        {TABS.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setFilter(tab.key)}
+            className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
+              filter === tab.key
+                ? "bg-navy text-white shadow-sm"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+            }`}
+          >
+            {tab.label}
+            <span
+              className={`ml-2 rounded-full px-1.5 py-0.5 text-[11px] ${
+                filter === tab.key ? "bg-white/15 text-white" : "bg-white text-neutral-400"
               }`}
             >
-              {tab.label}
-              <span
-                className={`ml-2 rounded-full px-1.5 py-0.5 text-[11px] ${
-                  filter === tab.key ? "bg-white/15 text-white" : "bg-white text-neutral-400"
+              {counts[tab.key]}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-2">
+          {dietaryTags.map((tag) => {
+            const active = tagFilters.includes(tag);
+            return (
+              <button
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                aria-pressed={active}
+                className={`shrink-0 rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition ${
+                  active
+                    ? "border-accent bg-accent/10 text-accent-dark"
+                    : "border-black/10 bg-white text-neutral-600 hover:border-accent/40 hover:text-accent-dark"
                 }`}
               >
-                {counts[tab.key]}
-              </span>
-            </button>
-          ))}
+                {tag}
+                <span className={`ml-1.5 text-[11px] ${active ? "text-accent-dark/70" : "text-neutral-400"}`}>
+                  {tagCounts[tag]}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         <div className="relative w-full sm:w-72">
