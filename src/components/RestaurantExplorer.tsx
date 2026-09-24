@@ -54,6 +54,14 @@ export default function RestaurantExplorer({ restaurants, locale }: { restaurant
     setTagFilters((prev) => (prev.includes(tag) ? prev.filter((t2) => t2 !== tag) : [...prev, tag]));
   }
 
+  const hasActiveFilters = filter !== "all" || tagFilters.length > 0 || query.trim().length > 0;
+
+  function clearAll() {
+    setFilter("all");
+    setTagFilters([]);
+    setQuery("");
+  }
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return restaurants.filter((r) => {
@@ -70,71 +78,92 @@ export default function RestaurantExplorer({ restaurants, locale }: { restaurant
 
   return (
     <section id="restaurants" className="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
-      <div className="flex flex-wrap gap-2">
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setFilter(tab.key)}
-            className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
-              filter === tab.key
-                ? "bg-navy text-white shadow-sm"
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-            }`}
-          >
-            {tab.label}
-            <span
-              className={`ml-2 rounded-full px-1.5 py-0.5 text-[11px] ${
-                filter === tab.key ? "bg-white/15 text-white" : "bg-white text-neutral-400"
+      <div className="rounded-2xl border border-black/5 bg-neutral-50/70 p-5 shadow-[0_1px_2px_rgba(16,24,43,0.04)] sm:p-6">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">{t.cuisineLabel}</p>
+          {hasActiveFilters && (
+            <button
+              onClick={clearAll}
+              className="text-[12px] font-semibold text-accent-dark transition hover:text-accent"
+            >
+              {t.clearFilters}
+            </button>
+          )}
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {TABS.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setFilter(tab.key)}
+              aria-pressed={filter === tab.key}
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                filter === tab.key
+                  ? "bg-navy text-white shadow-sm"
+                  : "border border-black/10 bg-white text-neutral-600 hover:border-navy/20 hover:text-navy"
               }`}
             >
-              {counts[tab.key]}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2">
-          {dietaryTags.map((tag) => {
-            const active = tagFilters.includes(tag);
-            return (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                aria-pressed={active}
-                className={`shrink-0 rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition ${
-                  active
-                    ? "border-accent bg-accent/10 text-accent-dark"
-                    : "border-black/10 bg-white text-neutral-600 hover:border-accent/40 hover:text-accent-dark"
+              {tab.label}
+              <span
+                className={`ml-2 rounded-full px-1.5 py-0.5 text-[11px] ${
+                  filter === tab.key ? "bg-white/15 text-white" : "bg-neutral-100 text-neutral-400"
                 }`}
               >
-                {tag}
-                <span className={`ml-1.5 text-[11px] ${active ? "text-accent-dark/70" : "text-neutral-400"}`}>
-                  {tagCounts[tag]}
-                </span>
-              </button>
-            );
-          })}
+                {counts[tab.key]}
+              </span>
+            </button>
+          ))}
         </div>
 
-        <div className="relative w-full sm:w-72">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="m21 21-4.3-4.3" strokeLinecap="round" />
-          </svg>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={t.searchPlaceholder}
-            className="w-full rounded-full border border-black/10 bg-white py-2.5 pl-9 pr-4 text-sm text-navy placeholder:text-neutral-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-          />
+        <div className="my-5 h-px bg-black/5" />
+
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex-1">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">{t.dietaryLabel}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {dietaryTags.map((tag) => {
+                const active = tagFilters.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    aria-pressed={active}
+                    className={`shrink-0 rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition ${
+                      active
+                        ? "border-accent bg-accent text-white shadow-sm"
+                        : "border-black/10 bg-white text-neutral-600 hover:border-accent/40 hover:text-accent-dark"
+                    }`}
+                  >
+                    {tag}
+                    <span className={`ml-1.5 text-[11px] ${active ? "text-white/75" : "text-neutral-400"}`}>
+                      {tagCounts[tag]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="w-full lg:w-72 lg:pt-[21px]">
+            <div className="relative">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" strokeLinecap="round" />
+              </svg>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t.searchPlaceholder}
+                className="w-full rounded-full border border-black/10 bg-white py-2.5 pl-9 pr-4 text-sm text-navy placeholder:text-neutral-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
