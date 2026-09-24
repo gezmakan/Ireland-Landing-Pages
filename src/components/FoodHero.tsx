@@ -1,11 +1,28 @@
 import Image from "next/image";
 import { restaurants } from "@/data/food";
 
-const collageSlugs = ["darkey-kelly-s", "pera-mediterranean-bbq", "yamamori-izakaya", "boojum"];
-
-const collage = collageSlugs
-  .map((slug) => restaurants.find((r) => r.slug === slug))
-  .filter((r): r is NonNullable<typeof r> => Boolean(r));
+const collage = [
+  {
+    key: "mixed-grill",
+    alt: "Mixed grill platter",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&h=800&q=80",
+  },
+  {
+    key: "sushi",
+    alt: "Assorted sushi platter",
+    image: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&h=800&q=80",
+  },
+  {
+    key: "fish-and-chips",
+    alt: "Fish and chips",
+    image: "https://images.unsplash.com/photo-1697748836791-9ddf7e616ece?auto=format&fit=crop&w=800&h=800&q=80",
+  },
+  {
+    key: "pizza",
+    alt: "Fresh pizza",
+    image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&h=800&q=80",
+  },
+];
 
 const cuisineCount = new Set(restaurants.map((r) => r.category)).size;
 const halalCount = restaurants.filter((r) => r.offering.some((o) => o.toLowerCase().includes("halal"))).length;
@@ -65,14 +82,14 @@ export default function FoodHero() {
 
         <div className="relative">
           <div className="grid grid-cols-2 gap-4">
-            {collage.map((restaurant, i) => (
+            {collage.map((item, i) => (
               <div
-                key={restaurant.slug}
+                key={item.key}
                 className="relative aspect-square overflow-hidden rounded-2xl bg-navy-soft shadow-lg"
               >
                 <Image
-                  src={restaurant.image}
-                  alt={restaurant.name}
+                  src={item.image}
+                  alt={item.alt}
                   fill
                   sizes="(min-width: 1024px) 22vw, 45vw"
                   className="object-cover"
