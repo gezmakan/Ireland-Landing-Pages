@@ -9,8 +9,8 @@ const collage = [
   },
   {
     key: "sushi",
-    alt: "Assorted sushi platter",
-    image: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&h=800&q=80",
+    alt: "Sushi rolls with salmon roe",
+    image: "https://images.unsplash.com/photo-1653122024993-31e02aedb1ac?auto=format&fit=crop&w=800&h=800&q=80",
   },
   {
     key: "fish-and-chips",
