@@ -12,6 +12,13 @@ const CUISINE_TYPE_TR: Record<string, string> = {
   "Italian Food": "İtalyan Mutfağı",
   "Japanese Food": "Japon Mutfağı",
   "Mexican Food": "Meksika Mutfağı",
+  "Neapolitan Pizza": "Napoli Usulü Pizza",
+  "Italian / Pinsa Romana": "İtalyan / Pinsa Romana",
+  Teppanyaki: "Teppanyaki",
+  "Korean Food": "Kore Mutfağı",
+  "Vietnamese Food": "Vietnam Mutfağı",
+  "Brazilian Steakhouse": "Brezilya Steakhouse",
+  "Malaysian Food": "Malezya Mutfağı",
 };
 
 const OFFERING_TR: Record<string, string> = {

@@ -1,4 +1,15 @@
-export type CuisineCategory = "local" | "turkish" | "chinese" | "indian" | "italian" | "japanese" | "mexican";
+export type CuisineCategory =
+  | "local"
+  | "turkish"
+  | "chinese"
+  | "indian"
+  | "italian"
+  | "japanese"
+  | "mexican"
+  | "korean"
+  | "vietnamese"
+  | "brazilian"
+  | "malaysian";
 
 export interface Restaurant {
   slug: string;
@@ -455,6 +466,110 @@ const raw: Omit<Restaurant, "slug">[] = [
     category: "mexican",
     image: `${IMG}/cd600e2f-ff3a-4a5b-8e68-f4a38edfdcc5.jpg`,
   },
+
+  // Additional highly-rated Dublin restaurants (4.4+ Google rating), researched
+  // separately from the source scrape. Photos are cuisine-representative stock
+  // images (Unsplash), not venue photos — see food.ts comment history.
+  {
+    name: "Cirillo's",
+    cuisineType: "Neapolitan Pizza",
+    address: "140 Baggot Street Lower, Dublin 2",
+    rating: 4.5,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€10-20",
+    category: "italian",
+    image: "https://images.unsplash.com/photo-1554136812-8b7875b188b2?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "PI (George's Street)",
+    cuisineType: "Neapolitan Pizza",
+    address: "10 South Great George's Street, Dublin 2",
+    rating: 4.6,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€10-20",
+    category: "italian",
+    image: "https://images.unsplash.com/photo-1649688423692-308d2fc1027d?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Sano Pizza",
+    cuisineType: "Neapolitan Pizza",
+    address: "2 Exchange Street Upper, Temple Bar, Dublin 2",
+    rating: 4.4,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€10-20",
+    category: "italian",
+    image: "https://images.unsplash.com/photo-1773944052254-b15b9b4a8736?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Il Vicoletto",
+    cuisineType: "Italian Food",
+    address: "5 Crow Street, Temple Bar, Dublin 2",
+    rating: 4.5,
+    offering: ["Vegetarian"],
+    priceRange: "€20-30",
+    category: "italian",
+    image: "https://images.unsplash.com/photo-1484325881845-65073528922e?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Bar Italia",
+    cuisineType: "Italian / Pinsa Romana",
+    address: "26 Lower Ormond Quay, Dublin 1",
+    rating: 4.6,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€20-30",
+    category: "italian",
+    image: "https://images.unsplash.com/photo-1778850620699-79ba3ff60bf0?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Chai Yo",
+    cuisineType: "Teppanyaki",
+    address: "100 Baggot Street Lower, Dublin 2",
+    rating: 4.6,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€30-60",
+    category: "japanese",
+    image: "https://images.unsplash.com/photo-1682566509605-b5bb1ef7eac2?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "The Korean Table",
+    cuisineType: "Korean Food",
+    address: "Manor Street, Stoneybatter, Dublin 7",
+    rating: 4.7,
+    offering: ["Vegan"],
+    priceRange: "€20-30",
+    category: "korean",
+    image: "https://images.unsplash.com/photo-1741295017668-c8132acd6fc0?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Pho Ta",
+    cuisineType: "Vietnamese Food",
+    address: "6 Cope Street, Temple Bar, Dublin 2",
+    rating: 4.5,
+    offering: ["Vegetarian", "Vegan"],
+    priceRange: "€10-20",
+    category: "vietnamese",
+    image: "https://images.unsplash.com/photo-1766050586763-723571af4dde?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Brasa",
+    cuisineType: "Brazilian Steakhouse",
+    address: "Ormond Quay Upper, Dublin 1",
+    rating: 4.6,
+    offering: ["Vegetarian"],
+    priceRange: "€30-40",
+    category: "brazilian",
+    image: "https://images.unsplash.com/photo-1748864221046-95a3ae8192cd?auto=format&fit=crop&w=800&h=600&q=80",
+  },
+  {
+    name: "Kopitiam",
+    cuisineType: "Malaysian Food",
+    address: "53 Capel Street, Dublin 1",
+    rating: 4.4,
+    offering: ["Halal", "Vegetarian"],
+    priceRange: "€10-20",
+    category: "malaysian",
+    image: "https://images.unsplash.com/photo-1770966485209-e20d97337f1a?auto=format&fit=crop&w=800&h=600&q=80",
+  },
 ];
 
 export const restaurants: Restaurant[] = raw.map((r) => ({ ...r, slug: slugify(r.name) }));
@@ -467,6 +582,10 @@ export const CUISINE_LABELS: Record<CuisineCategory, string> = {
   italian: "Italian",
   japanese: "Japanese",
   mexican: "Mexican",
+  korean: "Korean",
+  vietnamese: "Vietnamese",
+  brazilian: "Brazilian",
+  malaysian: "Malaysian",
 };
 
 export function mapsSearchUrl(r: Pick<Restaurant, "name" | "address">) {

@@ -21,6 +21,10 @@ export default function RestaurantExplorer({ restaurants, locale }: { restaurant
     { key: "italian", label: t.tabs.italian },
     { key: "japanese", label: t.tabs.japanese },
     { key: "mexican", label: t.tabs.mexican },
+    { key: "korean", label: t.tabs.korean },
+    { key: "vietnamese", label: t.tabs.vietnamese },
+    { key: "brazilian", label: t.tabs.brazilian },
+    { key: "malaysian", label: t.tabs.malaysian },
   ];
 
   const counts = useMemo(() => {
