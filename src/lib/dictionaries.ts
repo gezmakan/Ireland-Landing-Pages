@@ -57,8 +57,8 @@ export const dictionaries = {
     hero: {
       kickerPrefix: "İrlanda",
       kickerAccent: "Aktivite Rehberi",
-      headlinePrefix: "İrlanda'da yapılacak her şey,",
-      headlineAccent: "ziyaretiniz boyunca.",
+      headlinePrefix: "İrlanda'da neler görmelisiniz,",
+      headlineAccent: "ziyaretiniz boyunca?",
       paragraph:
         "Ücretsiz müzelerden öğrenci fiyatlı simge yapılara ve tam günlük maceralara kadar — bu, Education State'in her uluslararası öğrenciyle paylaştığı aynı özenle hazırlanmış aktivite listesi, artık tek bir yerde aranabilir.",
       browseCta: "Aktivitelere Göz At",
@@ -95,8 +95,8 @@ export const dictionaries = {
     hero: {
       kickerPrefix: "Irland",
       kickerAccent: "Aktivitätenführer",
-      headlinePrefix: "Alles, was man in Irland unternehmen kann,",
-      headlineAccent: "während des Aufenthalts.",
+      headlinePrefix: "Was man in Irland sehen sollte,",
+      headlineAccent: "während des Aufenthalts?",
       paragraph:
         "Von kostenlosen Museen über Attraktionen zu Studierendenpreisen bis hin zu ganztägigen Abenteuern — dies ist dieselbe kuratierte Aktivitätenliste, die Education State mit jedem internationalen Studierenden teilt, jetzt an einem Ort durchsuchbar.",
       browseCta: "Aktivitäten entdecken",
