@@ -124,8 +124,8 @@ export const dictionaries = {
     food: {
       kickerPrefix: "İrlanda",
       kickerAccent: "Yemek Rehberi",
-      headlinePrefix: "İrlanda'da nerede yemek yenir,",
-      headlineAccent: "ziyaretiniz boyunca?",
+      headlinePrefix: "",
+      headlineAccent: "İrlanda'da nerede yemek yenir?",
       paragraph: (count: number, cuisines: number) =>
         `${cuisines} farklı mutfaktan ${count}+ Dublin restoranını keşfedin; sıcacık İrlanda pub'larından helal dostu ızgaralara kadar. Mutfağa göre filtreleyin, fiyat aralığını kontrol edin ve bir sonraki öğününüzü bulun.`,
       browseCta: "Restoranlara Göz At",

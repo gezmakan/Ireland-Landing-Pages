@@ -49,7 +49,8 @@ export default function FoodHero({ locale }: { locale: Locale }) {
             {t.kickerPrefix} <span className="text-accent">{t.kickerAccent}</span>
           </h1>
           <p className="mt-3 text-2xl font-bold leading-snug text-navy sm:text-3xl">
-            {t.headlinePrefix} <span className="text-accent">{t.headlineAccent}</span>
+            {t.headlinePrefix ? `${t.headlinePrefix} ` : null}
+            <span className="text-accent">{t.headlineAccent}</span>
           </p>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-500 sm:text-xl">
             {t.paragraph(baseRestaurants.length, cuisineCount)}
