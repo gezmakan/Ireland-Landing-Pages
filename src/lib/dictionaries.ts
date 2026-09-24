@@ -22,7 +22,7 @@ export const dictionaries = {
       headlinePrefix: "What to see in Ireland,",
       headlineAccent: "during your visit?",
       paragraph:
-        "From free museums to student-priced icons and full-day adventures — this is the same curated activity list Education State shares with every international student, now searchable in one place.",
+        "Explore over 60+ places and experiences, from free museums and Ireland favourites to unforgettable day trips. Pick what suits your budget, watch a video, and plan your next adventure.",
       browseCta: "Browse Activities",
       visitCta: "Visit Education State",
       stats: {
@@ -60,7 +60,7 @@ export const dictionaries = {
       headlinePrefix: "İrlanda'da neler görmelisiniz,",
       headlineAccent: "ziyaretiniz boyunca?",
       paragraph:
-        "Ücretsiz müzelerden öğrenci fiyatlı simge yapılara ve tam günlük maceralara kadar — bu, Education State'in her uluslararası öğrenciyle paylaştığı aynı özenle hazırlanmış aktivite listesi, artık tek bir yerde aranabilir.",
+        "60'tan fazla mekan ve deneyimi keşfedin; ücretsiz müzelerden İrlanda'nın favorilerine, unutulmaz günübirlik turlara kadar. Bütçenize uygun olanı seçin, bir video izleyin ve bir sonraki maceranızı planlayın.",
       browseCta: "Aktivitelere Göz At",
       visitCta: "Education State'i Ziyaret Et",
       stats: {
@@ -98,7 +98,7 @@ export const dictionaries = {
       headlinePrefix: "Was man in Irland sehen sollte,",
       headlineAccent: "während des Aufenthalts?",
       paragraph:
-        "Von kostenlosen Museen über Attraktionen zu Studierendenpreisen bis hin zu ganztägigen Abenteuern — dies ist dieselbe kuratierte Aktivitätenliste, die Education State mit jedem internationalen Studierenden teilt, jetzt an einem Ort durchsuchbar.",
+        "Entdecken Sie über 60 Orte und Erlebnisse – von kostenlosen Museen und irischen Favoriten bis hin zu unvergesslichen Tagesausflügen. Wählen Sie, was zu Ihrem Budget passt, schauen Sie sich ein Video an und planen Sie Ihr nächstes Abenteuer.",
       browseCta: "Aktivitäten entdecken",
       visitCta: "Education State besuchen",
       stats: {
