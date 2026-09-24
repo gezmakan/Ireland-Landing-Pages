@@ -233,7 +233,7 @@ const raw: Omit<Restaurant, "slug">[] = [
   {
     name: "Holi Indian Restaurant",
     cuisineType: "Indian Food",
-    address: "71 Dame St, Temple Bar, Dublin, D02 YH90",
+    address: "18 Drumcondra Rd Lower, Botanic, Dublin 9, D09 VX73",
     rating: 4.6,
     offering: ["Halal"],
     priceRange: "€10-20",
